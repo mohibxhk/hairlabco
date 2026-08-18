@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Appointment - Hair Lab Co.</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0d0d0d] text-zinc-100 font-sans antialiased selection:bg-zinc-700 selection:text-white">
+
+  <!-- Top Announcement Bar -->
+  <div class="border-b border-zinc-800 bg-zinc-950 py-3 text-xs tracking-widest text-zinc-400 uppercase text-center px-4">
+    <span>● Open Today 10:00 – 22:00</span>
+    <span class="mx-3 text-zinc-700">|</span>
+    <span>Appointments: 37300779</span>
+    <span class="mx-3 text-zinc-700">|</span>
+    <span>@hairlabco</span>
+  </div>
+
+  <!-- Header -->
+  <header class="max-w-4xl mx-auto px-6 pt-12 pb-8 text-center border-b border-zinc-900">
+    <h1 class="text-3xl md:text-5xl font-light tracking-widest uppercase text-white mb-3">
+      Book Your Appointment
+    </h1>
+    <p class="text-zinc-400 text-sm tracking-wider uppercase font-light">
+      Hair · Shave · Groom — Est. 1979
+    </p>
+  </header>
+
+  <!-- Main Booking Area -->
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    
+    <!-- Booking Form View -->
+    <div id="booking-container" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      
+      <!-- Left: Options & Form -->
+      <div class="lg:col-span-2 space-y-8">
+        
+        <!-- Step 1: Select Service -->
+        <section class="space-y-4">
+          <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+            <span class="w-5 h-5 rounded-full bg-zinc-800 text-zinc-200 flex items-center justify-center text-[10px]">1</span>
+            Select Service
+          </div>
+
+          <div class="grid grid-cols-1 gap-3">
+            <!-- Service 1 -->
+            <div onclick="selectService('Signature Haircut', '$35', '45 mins', this)" class="service-card p-4 border border-white bg-zinc-900 cursor-pointer transition-all duration-200">
+              <div class="flex justify-between items-baseline mb-1">
+                <h3 class="text-sm font-medium tracking-wide uppercase text-white">Signature Haircut</h3>
+                <span class="text-sm font-semibold tracking-wider text-white">$35</span>
+              </div>
+              <p class="text-xs text-zinc-400 mb-2">Precision cut, hot towel finish, and professional styling.</p>
+              <span class="text-[11px] text-zinc-500 uppercase tracking-widest">45 mins</span>
+            </div>
+
+            <!-- Service 2 -->
+            <div onclick="selectService('Beard Trim & Sculpting', '$25', '30 mins', this)" class="service-card p-4 border border-zinc-800 bg-zinc-950 hover:border-zinc-700 cursor-pointer transition-all duration-200">
+              <div class="flex justify-between items-baseline mb-1">
+                <h3 class="text-sm font-medium tracking-wide uppercase text-white">Beard Trim & Sculpting</h3>
+                <span class="text-sm font-semibold tracking-wider text-white">$25</span>
+              </div>
+              <p class="text-xs text-zinc-400 mb-2">Shape up, straight razor line, and essential oils.</p>
+              <span class="text-[11px] text-zinc-500 uppercase tracking-widest">30 mins</span>
+            </div>
+
+            <!-- Service 3 -->
+            <div onclick="selectService('The Full Lab Package', '$55', '75 mins', this)" class="service-card p-4 border border-zinc-800 bg-zinc-950 hover:border-zinc-700 cursor-pointer transition-all duration-200">
+              <div class="flex justify-between items-baseline mb-1">
+                <h3 class="text-sm font-medium tracking-wide uppercase text-white">The Full Lab Package</h3>
+                <span class="text-sm font-semibold tracking-wider text-white">$55</span>
+              </div>
+              <p class="text-xs text-zinc-400 mb-2">Haircut + Beard Trim + Hot Towel Treatment.</p>
+              <span class="text-[11px] text-zinc-500 uppercase tracking-widest">75 mins</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 2: Select Specialist -->
+        <section class="space-y-4">
+          <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+            <span class="w-5 h-5 rounded-full bg-zinc-800 text-zinc-200 flex items-center justify-center text-[10px]">2</span>
+            Select Specialist
+          </div>
+          <select id="barber-select" onchange="updateSummary()" class="w-full bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm p-3.5 focus:border-white focus:outline-none tracking-wide">
+            <option value="Any Available Specialist">Any Available Specialist</option>
+            <option value="Alex - Master Barber">Alex - Master Barber</option>
+            <option value="Marco - Beard & Styling Expert">Marco - Beard & Styling Expert</option>
+            <option value="Sam - Senior Stylist">Sam - Senior Stylist</option>
+          </select>
+        </section>
+
+        <!-- Step 3: Date & Time -->
+        <section class="space-y-4">
+          <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+            <span class="w-5 h-5 rounded-full bg-zinc-800 text-zinc-200 flex items-center justify-center text-[10px]">3</span>
+            Date & Time
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[11px] uppercase tracking-widest text-zinc-500 mb-2">Select Date</label>
+              <input type="date" id="date-input" onchange="updateSummary()" class="w-full bg-zinc-950 border border-zinc-800 text-zinc-200 text-sm p-3 focus:border-white focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] uppercase tracking-widest text-zinc-500 mb-2">Available Slots</label>
+              <div class="grid grid-cols-3 gap-2">
+                <button type="button" onclick="selectTime('10:00 AM', this)" class="time-btn py-2 text-xs border border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-600 transition-all">10:00 AM</button>
+                <button type="button" onclick="selectTime('11:30 AM', this)" class="time-btn py-2 text-xs border border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-600 transition-all">11:30 AM</button>
+                <button type="button" onclick="selectTime('01:00 PM', this)" class="time-btn py-2 text-xs border border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-600 transition-all">01:00 PM</button>
+                <button type="button" onclick="selectTime('03:30 PM', this)" class="time-btn py-2 text-xs border border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-600 transition-all">03:30 PM</button>
+                <button type="button" onclick="selectTime('05:00 PM', this)" class="time-btn py-2 text-xs border border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-600 transition-all">05:00 PM</button>
+                <button type="button" onclick="selectTime('07:00 PM', this)" class="time-btn py-2 text-xs border border-zinc-800 bg-zinc-950 text-zinc-300 hover:border-zinc-600 transition-all">07:00 PM</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 4: Contact Form -->
+        <section class="space-y-4 pt-4 border-t border-zinc-900">
+          <div class="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+            <span class="w-5 h-5 rounded-full bg-zinc-800 text-zinc-200 flex items-center justify-center text-[10px]">4</span>
+            Your Details
+          </div>
+          <form id="booking-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input type="text" id="user-name" placeholder="FULL NAME *" required class="bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs p-3.5 focus:border-white focus:outline-none tracking-widest" />
+              <input type="tel" id="user-phone" placeholder="PHONE NUMBER *" required class="bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs p-3.5 focus:border-white focus:outline-none tracking-widest" />
+            </div>
+            <input type="email" id="user-email" placeholder="EMAIL ADDRESS *" required class="w-full bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs p-3.5 focus:border-white focus:outline-none tracking-widest" />
+            <textarea placeholder="SPECIAL INSTRUCTIONS OR NOTES (OPTIONAL)" rows="3" class="w-full bg-zinc-950 border border-zinc-800 text-zinc-200 text-xs p-3.5 focus:border-white focus:outline-none tracking-widest"></textarea>
+
+            <button type="submit" class="w-full py-4 bg-white text-black font-semibold text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors duration-200">
+              Confirm & Book Appointment
+            </button>
+          </form>
+        </section>
+
+      </div>
+
+      <!-- Right: Summary Sidebar -->
+      <div class="lg:col-span-1">
+        <div class="bg-zinc-950 border border-zinc-800 p-6 sticky top-8 space-y-6">
+          <h2 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 border-b border-zinc-800 pb-3">
+            Booking Summary
+          </h2>
+
+          <div class="space-y-4 text-xs">
+            <div>
+              <span class="text-zinc-500 uppercase tracking-widest block text-[10px]">Service</span>
+              <p id="sum-service" class="text-zinc-100 font-medium tracking-wide mt-1">Signature Haircut</p>
+              <p id="sum-duration" class="text-zinc-400">$35 · 45 mins</p>
+            </div>
+
+            <div>
+              <span class="text-zinc-500 uppercase tracking-widest block text-[10px]">Specialist</span>
+              <p id="sum-barber" class="text-zinc-100 font-medium tracking-wide mt-1">Any Available Specialist</p>
+            </div>
+
+            <div>
+              <span class="text-zinc-500 uppercase tracking-widest block text-[10px]">Date & Time</span>
+              <p id="sum-datetime" class="text-zinc-100 font-medium tracking-wide mt-1">Select Date & Time</p>
+            </div>
+          </div>
+
+          <div class="border-t border-zinc-800 pt-4 flex justify-between items-baseline">
+            <span class="text-xs uppercase tracking-widest text-zinc-400">Total Due</span>
+            <span id="sum-price" class="text-lg font-bold text-white tracking-wider">$35</span>
+          </div>
+
+          <div class="text-[11px] text-zinc-500 tracking-wide leading-relaxed pt-2">
+            <p>● Pay at the shop upon arrival.</p>
+            <p>● Free cancellation up to 2 hours before appointment.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Confirmation Screen (Hidden by default) -->
+    <div id="confirmation-container" class="hidden max-w-md mx-auto text-center py-16 px-6 bg-zinc-950 border border-zinc-800 space-y-6">
+      <div class="w-12 h-12 rounded-full border border-white text-white flex items-center justify-center mx-auto text-xl">✓</div>
+      <h2 class="text-2xl font-light tracking-widest uppercase text-white">Booking Confirmed</h2>
+      <p id="confirm-msg" class="text-xs text-zinc-400 leading-relaxed tracking-wide">
+        Thank you! Your appointment has been scheduled.
+      </p>
+      <button onclick="location.reload()" class="mt-6 px-6 py-3 border border-zinc-700 text-xs uppercase tracking-widest text-zinc-300 hover:bg-zinc-900">
+        Book Another Session
+      </button>
+    </div>
+
+  </main>
+
+  <!-- JavaScript Code -->
+  <script>
+    let selectedServiceName = "Signature Haircut";
+    let selectedServicePrice = "$35";
+    let selectedServiceDuration = "45 mins";
+    let selectedTimeSlot = "";
+
+    function selectService(name, price, duration, element) {
+      selectedServiceName = name;
+      selectedServicePrice = price;
+      selectedServiceDuration = duration;
+
+      // Card style toggle
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.classList.remove('border-white', 'bg-zinc-900');
+        card.classList.add('border-zinc-800', 'bg-zinc-950');
+      });
+      element.classList.remove('border-zinc-800', 'bg-zinc-950');
+      element.classList.add('border-white', 'bg-zinc-900');
+
+      updateSummary();
+    }
+
+    function selectTime(time, element) {
+      selectedTimeSlot = time;
+
+      document.querySelectorAll('.time-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-black', 'border-white', 'font-medium');
+        btn.classList.add('bg-zinc-950', 'text-zinc-300', 'border-zinc-800');
+      });
+      element.classList.remove('bg-zinc-950', 'text-zinc-300', 'border-zinc-800');
+      element.classList.add('bg-white', 'text-black', 'border-white', 'font-medium');
+
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const barber = document.getElementById('barber-select').value;
+      const date = document.getElementById('date-input').value;
+
+      document.getElementById('sum-service').innerText = selectedServiceName;
+      document.getElementById('sum-duration').innerText = selectedServicePrice + " · " + selectedServiceDuration;
+      document.getElementById('sum-price').innerText = selectedServicePrice;
+      document.getElementById('sum-barber').innerText = barber;
+
+      if (date || selectedTimeSlot) {
+        document.getElementById('sum-datetime').innerText = (date ? date : 'Select Date') + (selectedTimeSlot ? ' at ' + selectedTimeSlot : '');
+      } else {
+        document.getElementById('sum-datetime').innerText = "Select Date & Time";
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('user-name').value;
+      const date = document.getElementById('date-input').value;
+
+      document.getElementById('booking-container').classList.add('hidden');
+      document.getElementById('confirmation-container').classList.remove('hidden');
+
+      document.getElementById('confirm-msg').innerHTML = 
+        `Thank you, <strong class="text-white">${name}</strong>. Your appointment for <span class="text-white">${selectedServiceName}</span> on <span class="text-white">${date || 'scheduled date'}</span> ${selectedTimeSlot ? 'at ' + selectedTimeSlot : ''} has been confirmed.`;
+    }
+  </script>
+</body>
+</html>
